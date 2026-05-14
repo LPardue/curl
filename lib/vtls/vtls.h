@@ -31,6 +31,7 @@ struct ssl_primary_config;
 struct Curl_cfilter;
 struct Curl_easy;
 struct dynbuf;
+struct alpn_spec;
 
 #define SSLSUPP_CA_PATH      (1 << 0) /* supports CAPATH */
 #define SSLSUPP_CERTINFO     (1 << 1) /* supports CURLOPT_CERTINFO */
@@ -216,6 +217,10 @@ CURLcode Curl_ssl_cfilter_add(struct Curl_easy *data,
 
 CURLcode Curl_cf_ssl_insert_after(struct Curl_cfilter *cf_at,
                                   struct Curl_easy *data);
+
+CURLcode Curl_cf_ssl_insert_after_alpn(struct Curl_cfilter *cf_at,
+                                       struct Curl_easy *data,
+                                       const struct alpn_spec *alpn);
 
 CURLcode Curl_ssl_cfilter_remove(struct Curl_easy *data,
                                  int sockindex, bool send_shutdown);

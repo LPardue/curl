@@ -1753,6 +1753,28 @@ CURLcode Curl_cf_ssl_insert_after(struct Curl_cfilter *cf_at,
   return result;
 }
 
+CURLcode Curl_cf_ssl_insert_after_alpn(struct Curl_cfilter *cf_at,
+                                       struct Curl_easy *data,
+                                       const struct alpn_spec *alpn)
+{
+  struct Curl_cfilter *cf = NULL;
+  struct ssl_connect_data *ctx;
+  CURLcode result;
+
+  ctx = cf_ctx_new(data, alpn);
+  if(!ctx)
+    return CURLE_OUT_OF_MEMORY;
+
+  result = Curl_cf_create(&cf, &Curl_cft_ssl, ctx);
+  if(result) {
+    cf_ctx_free(ctx);
+    return result;
+  }
+
+  Curl_conn_cf_insert_after(cf_at, cf);
+  return CURLE_OK;
+}
+
 #ifndef CURL_DISABLE_PROXY
 
 static CURLcode cf_ssl_proxy_create(struct Curl_cfilter **pcf,

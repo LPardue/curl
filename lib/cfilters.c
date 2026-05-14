@@ -761,6 +761,7 @@ int Curl_socktype_for_transport(uint8_t transport)
 {
   switch(transport) {
   case TRNSPRT_TCP:
+  case TRNSPRT_QMUX:
     return SOCK_STREAM;
   case TRNSPRT_UNIX:
     return SOCK_STREAM;
@@ -773,6 +774,7 @@ int Curl_protocol_for_transport(uint8_t transport)
 {
   switch(transport) {
   case TRNSPRT_TCP:
+  case TRNSPRT_QMUX:
     return IPPROTO_TCP;
   case TRNSPRT_UNIX:
     return IPPROTO_IP;

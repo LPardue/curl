@@ -115,6 +115,9 @@ void Curl_http_neg_init(struct Curl_easy *data, struct http_negotiation *neg)
   case CURL_HTTP_VERSION_3ONLY:
     neg->wanted = neg->allowed = (CURL_HTTP_V3x);
     break;
+  case CURL_HTTP_VERSION_3_QMUX:
+    neg->wanted = neg->allowed = (CURL_HTTP_V3x);
+    break;
   case CURL_HTTP_VERSION_NONE:
   default:
     neg->wanted = (CURL_HTTP_V1x | CURL_HTTP_V2x);

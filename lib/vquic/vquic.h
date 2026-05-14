@@ -47,6 +47,12 @@ CURLcode Curl_cf_quic_create(struct Curl_cfilter **pcf,
 
 extern struct Curl_cftype Curl_cft_http3;
 
+CURLcode Curl_cf_qmux_create(struct Curl_cfilter **pcf,
+                              struct Curl_easy *data,
+                              struct connectdata *conn,
+                              struct Curl_sockaddr_ex *addr,
+                              uint8_t transport);
+
 #else
 #define Curl_vquic_init() 1
 #endif /* !CURL_DISABLE_HTTP && USE_HTTP3 */

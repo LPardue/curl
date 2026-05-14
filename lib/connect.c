@@ -590,7 +590,8 @@ CURLcode Curl_conn_setup(struct Curl_easy *data,
 
 #ifndef CURL_DISABLE_HTTP
   if(!conn->cfilter[sockindex] &&
-     conn->scheme->protocol == CURLPROTO_HTTPS) {
+     conn->scheme->protocol == CURLPROTO_HTTPS &&
+     conn->transport_wanted != TRNSPRT_QMUX) {
     DEBUGASSERT(ssl_mode != CURL_CF_SSL_DISABLE);
     result = Curl_cf_https_setup(data, conn, sockindex);
     if(result)

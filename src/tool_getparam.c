@@ -174,6 +174,7 @@ static const struct LongShort aliases[]= {
   {"http2-prior-knowledge",      ARG_NONE, ' ', C_HTTP2_PRIOR_KNOWLEDGE},
   {"http3",                      ARG_NONE|ARG_TLS, ' ', C_HTTP3},
   {"http3-only",                 ARG_NONE|ARG_TLS, ' ', C_HTTP3_ONLY},
+  {"http3-qmux",                 ARG_NONE|ARG_TLS, ' ', C_HTTP3_QMUX},
   {"ignore-content-length",      ARG_BOOL, ' ', C_IGNORE_CONTENT_LENGTH},
   {"include",                    ARG_BOOL, ' ', C_INCLUDE},
   {"insecure",                   ARG_BOOL, 'k', C_INSECURE},
@@ -1796,6 +1797,13 @@ static ParameterError opt_none(struct OperationConfig *config,
       return PARAM_LIBCURL_DOESNT_SUPPORT;
     else
       sethttpver(config, CURL_HTTP_VERSION_3ONLY);
+    break;
+  case C_HTTP3_QMUX: /* --http3-qmux */
+    /* HTTP/3 over QMux (TCP+TLS) without fallback */
+    if(!feature_http3)
+      return PARAM_LIBCURL_DOESNT_SUPPORT;
+    else
+      sethttpver(config, CURL_HTTP_VERSION_3_QMUX);
     break;
   case C_TLSV1: /* --tlsv1 */
     err = opt_sslver(config, 1);

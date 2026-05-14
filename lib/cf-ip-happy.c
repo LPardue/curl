@@ -72,6 +72,7 @@ struct transport_provider transport_providers[] = {
   { TRNSPRT_TCP, Curl_cf_tcp_create },
 #if !defined(CURL_DISABLE_HTTP) && defined(USE_HTTP3)
   { TRNSPRT_QUIC, Curl_cf_quic_create },
+  { TRNSPRT_QMUX, Curl_cf_qmux_create },
 #endif
 #ifndef CURL_DISABLE_TFTP
   { TRNSPRT_UDP, Curl_cf_udp_create },

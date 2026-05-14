@@ -2320,9 +2320,11 @@ typedef enum {
                                        HTTP, this option makes libcurl
                                        return error. */
 #define CURL_HTTP_VERSION_3ONLY 31L /* Use HTTP/3 without fallback. For
-                                       HTTPS only. For HTTP, this makes
-                                       libcurl return error. */
-#define CURL_HTTP_VERSION_LAST  32L /* *ILLEGAL* http version */
+                                        HTTPS only. For HTTP, this makes
+                                        libcurl return error. */
+#define CURL_HTTP_VERSION_3_QMUX 32L /* Use HTTP/3 over QMux (TCP+TLS).
+                                         No fallback. For HTTPS only. */
+#define CURL_HTTP_VERSION_LAST  33L /* *ILLEGAL* http version */
 
 /* Convenience definition simple because the name of the version is HTTP/2 and
    not 2.0. The 2_0 version of the enum name was set while the version was

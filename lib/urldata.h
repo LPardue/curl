@@ -308,6 +308,7 @@ struct hostname {
 #define TRNSPRT_UDP  4
 #define TRNSPRT_QUIC 5
 #define TRNSPRT_UNIX 6
+#define TRNSPRT_QMUX 7
 
 struct ip_quadruple {
   char remote_ip[MAX_IPADR_LEN];
@@ -320,7 +321,8 @@ struct ip_quadruple {
 #define CUR_IP_QUAD_HAS_PORTS(x)      \
   (((x)->transport == TRNSPRT_TCP) || \
    ((x)->transport == TRNSPRT_UDP) || \
-   ((x)->transport == TRNSPRT_QUIC))
+   ((x)->transport == TRNSPRT_QUIC) || \
+   ((x)->transport == TRNSPRT_QMUX))
 
 struct proxy_info {
   struct Curl_peer *peer; /* proxy to this peer */

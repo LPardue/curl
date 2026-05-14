@@ -1323,6 +1323,10 @@ static struct connectdata *allocate_conn(struct Curl_easy *data)
   conn->ip_version = data->set.ipver;
   conn->bits.connect_only = (bool)data->set.connect_only;
   conn->transport_wanted = TRNSPRT_TCP; /* most of them are TCP streams */
+#ifdef USE_HTTP3
+  if(data->set.httpwant == CURL_HTTP_VERSION_3_QMUX)
+    conn->transport_wanted = TRNSPRT_QMUX;
+#endif
 
   /* Store the local bind parameters that will be used for this connection */
   if(data->set.str[STRING_DEVICE]) {
